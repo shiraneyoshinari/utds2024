@@ -66,10 +66,34 @@ const token = new SkyWayAuthToken({
   let selectBox = null;
   leaveButton.disabled = true;
   
-  // STEP2: 自分自身のカメラとマイクを取得して描画
-  const { audio, video } = await SkyWayStreamFactory.createMicrophoneAudioAndCameraStream();
-  audio.attach(localAudio);
-  video.attach(localVideo);
+  // デバイスがiPhoneまたはAndroidかどうかを判定する関数
+  function isMobileDevice() {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    return /iPhone|iPad|iPod|Android/i.test(userAgent);
+  }
+  
+  (async () => {
+    // STEP2: 自分自身のカメラとマイクを取得して描画
+    let audio, video;
+  
+    try {
+      // iPhoneまたはAndroidの場合はアウトカメラを指定
+      if (isMobileDevice()) {
+        ({ audio, video } = await SkyWayStreamFactory.createMicrophoneAudioAndCameraStream({
+          video: { facingMode: { exact: 'environment' } }, // アウトカメラ
+        }));
+      } else {
+        // その他のデバイスの場合はデフォルト設定
+        ({ audio, video } = await SkyWayStreamFactory.createMicrophoneAudioAndCameraStream());
+      }
+  
+      // カメラとマイクを描画
+      audio.attach(localAudio);
+      video.attach(localVideo);
+    } catch (error) {
+      console.error('カメラデバイスの取得に失敗しました: ', error);
+    }
+  })();
 
   
   // Room作成/参加ボタンがクリックされた場合の処理
