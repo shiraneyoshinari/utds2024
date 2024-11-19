@@ -1,0 +1,31 @@
+body { 
+  margin: 10px; 
+}
+
+video {
+  background-color: #111;
+  width: 90%;
+  height: 100%;
+  max-height: 350px;
+}
+
+input{
+  width: 110px;
+}
+
+button{
+  width: 110px;
+}
+
+select{
+  width: 110px;
+}
+
+.grid-container{
+  display: grid;
+  grid-template-columns	:520px 520px;
+}
+
+.id-text{
+  font-size: 11px
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>SkyWay Tutorial</title>
+  <link rel="stylesheet" href="http://shirane.xsrv.jp/utds2024/style.css">
+</head>
+
+<body>
+  <h1>Prototype</h1>
+  <div class="grid-container">
+     <div id="local" class="item">
+      <video id="local-video" autoplay playsinline></video>
+      <audio id="local-audio" autoplay muted controls></audio>
+      <p class="id-text">ID: <span id="my-id"></span></p>
+      <button id="join-button" class="item" label="button">Room作成/参加</button>
+      <input id="room-name" placeholder="Room名"></input>
+      <button id="local-mute-buton" class="item" label="button" disabled>映像・音声OFF</button>
+      <button id="leave-button" class="item" label="button"　disabled>Room閉じる</button>
+    </div>
+    <div id="remote" class="item">
+      <video id="remote-video" autoplay playsinline></video>
+      <audio id="remote-audio" autoplay controls></audio>
+      <p class="id-text">ID: <span id="remote-id"></span></p>
+      <div id="button-area"></div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@skyway-sdk/room/dist/skyway_room-latest.js"></script>
+  <script src="http://shirane.xsrv.jp/utds2024/main.js"></script>
+</body>
+
+</html>
