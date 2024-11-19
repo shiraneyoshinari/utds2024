@@ -67,9 +67,15 @@ const token = new SkyWayAuthToken({
   leaveButton.disabled = true;
   
   // STEP2: 自分自身のカメラとマイクを取得して描画
-  const { audio, video } = await SkyWayStreamFactory.createMicrophoneAudioAndCameraStream();
+try {
+  const { audio, video } = await SkyWayStreamFactory.createMicrophoneAudioAndCameraStream({
+    video: { facingMode: { exact: 'environment' } },
+  });
   audio.attach(localAudio);
   video.attach(localVideo);
+} catch (error) {
+  console.error('カメラデバイスの取得に失敗しました: ', error);
+}
 
   
   // Room作成/参加ボタンがクリックされた場合の処理
